@@ -20,18 +20,33 @@
             packages: [{
                 name:"demo",
                 location:  "demo"
-            }]
+            },{
+                name:"dojo",
+                location:"lib/dojo"
+            },{
+                name:'dijit',
+                location:"lib/dijit"
+            },{
+                name:'dojox',
+                location:"lib/dojox"
+            }
+            ]
         }
     </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js" data-dojo-config="async: true"></script>
+    <script src="js/lib/dojo/dojo.js" data-dojo-config="async: true"></script>
     <script>
-       require([
+        require([
            'dojo/dom',
            'dojo/fx',
            'dojo/domReady!'
         ],function(dom, fx){
             var greeting = dom.byId('greeting');
             greeting.innerHTML +=' from Dojo!';
+            fx.slideTo({
+                node: greeting,
+                top:100,
+                left:200
+            }).play();
         });
     </script>
 </body>
