@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: dojoConfig</title>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Ubuntu:regular,bold&subset=Latin">
+    <link rel="stylesheet" type="text/css" href=".//css/hellodojo.css">
+</head>
+
+<body>
+   
+    <script>
+    dojoConfig = {
+        has: {
+            "dojo-firebug": true
+        },
+        app: {
+            userName: "Anonymous"
+        }
+    };
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>
+<script>
+    require(["dijit/Dialog", "dijit/registry", "dojo/parser", "dojo/_base/lang",
+    "dojo/json", "dojo/_base/config", "dojo/io-query", "dojo/domReady!"]
+    , function(Dialog, registry, parser, lang, JSON, config, ioQuery) {
+
+        // pull configuration from the query string
+        // and mix it into our app config
+        var queryParams = ioQuery.queryToObject(location.search.substring(1));
+        lang.mixin(config.app, queryParams);
+
+        // Create a dialog
+        var dialog = new Dialog({
+            title: "Welcome back " + config.app.userName,
+            content: "<pre>" + JSON.stringify(config, null, "\t") + "```"
+        });
+
+        // Draw on the app config to put up a personalized message
+        dialog.show();
+
+    });
+</script>
+</body>
+
+</html>
